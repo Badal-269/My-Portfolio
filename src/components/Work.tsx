@@ -2,6 +2,20 @@ import { useState } from 'react';
 import { works, type WorkItem } from '@/data/portfolio';
 import { Play, X, ArrowUpRight } from 'lucide-react';
 
+function getEmbedUrl(work: WorkItem) {
+  // Google Drive: accepts either the file ID or the full share link
+  if (work.platform === 'drive' || work.videoId.includes('drive.google.com')) {
+    const match = work.videoId.match(/\/d\/([^/?]+)/);
+    const id = match ? match[1] : work.videoId;
+    return `https://drive.google.com/file/d/${id}/preview`;
+  }
+  if (work.platform === 'vimeo') {
+    const [id, hash] = work.videoId.split('/');
+    return `https://player.vimeo.com/video/${id}?${hash ? `h=${hash}&` : ''}autoplay=1`;
+  }
+  return `https://www.youtube.com/embed/${work.videoId}?autoplay=1&rel=0`;
+}
+
 export function Work() {
   const [activeVideo, setActiveVideo] = useState<WorkItem | null>(null);
 
@@ -18,7 +32,7 @@ export function Work() {
             </h2>
           </div>
           <p className="hidden md:block text-sm text-secondary max-w-xs">
-            A collection of recent edits across film, commercial, and documentary work.
+            A collection of recent edits.
           </p>
         </div>
 
@@ -26,7 +40,7 @@ export function Work() {
           {works.map((work, i) => (
             <button
               key={work.id}
-              onClick={() => setActiveVideo(work)}
+              onClick={() => work.videoId && setActiveVideo(work)}
               className="reveal group text-left"
               style={{ transitionDelay: `${i * 0.08}s` }}
             >
@@ -112,7 +126,7 @@ export function Work() {
             </button>
             <div className="relative aspect-video rounded-sm overflow-hidden bg-black border border-white/10">
               <iframe
-                src={`https://www.youtube.com/embed/${activeVideo.videoId}?autoplay=1&rel=0`}
+                src={getEmbedUrl(activeVideo)}
                 title={activeVideo.title}
                 className="absolute inset-0 w-full h-full"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

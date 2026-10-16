@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { profile } from '@/data/portfolio';
 import { Mail, ArrowUpRight, Send } from 'lucide-react';
 
+const WHATSAPP_NUMBER = '917606806269'; // country code + number, digits only
+
 export function Contact() {
   const [formState, setFormState] = useState<'idle' | 'sending' | 'sent'>('idle');
   const [form, setForm] = useState({ name: '', email: '', message: '' });
@@ -9,14 +11,15 @@ export function Contact() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.name || !form.email || !form.message) return;
-    setFormState('sending');
-    setTimeout(() => {
-      setFormState('sent');
-      setForm({ name: '', email: '', message: '' });
-      setTimeout(() => setFormState('idle'), 3000);
-    }, 1200);
+    const text = `Hi Jagannath, I'm ${form.name}.\nEmail: ${form.email}\n\n${form.message}`;
+    window.open(
+      `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`,
+      '_blank'
+    );
+    setFormState('sent');
+    setForm({ name: '', email: '', message: '' });
+    setTimeout(() => setFormState('idle'), 3000);
   };
-
   return (
     <section
       id="contact"
@@ -45,7 +48,9 @@ export function Contact() {
                 Email
               </p>
               <a
-                href={`mailto:${profile.email}`}
+                href={`https://mail.google.com/mail/?view=cm&fs=1&to=${profile.email}`}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="group inline-flex items-center gap-2 text-lg md:text-xl font-medium hover:text-accent transition-colors duration-300"
               >
                 <Mail className="w-4 h-4 text-accent" />
