@@ -22,6 +22,7 @@ export interface WorkItem {
   videoId: string;
   platform: 'youtube' | 'vimeo' | 'drive' | '';
   duration: string;
+  orientation?: 'portrait';
 }
 
 export const works: WorkItem[] = [
@@ -34,6 +35,7 @@ export const works: WorkItem[] = [
     videoId: '1JpY1wRTu3WeUlwTnojgYkebViZqBTDv4',
     platform: 'drive',
     duration: '0:39',
+    orientation: 'portrait',
   },
   {
     id: 'w2',
@@ -44,16 +46,18 @@ export const works: WorkItem[] = [
     videoId: '1E5f4UJxA7VErfy2oUWuor1LZVgYU5VUB',
     platform: 'drive',
     duration: '0:22',
+    orientation: 'portrait',
   },
   {
     id: 'w3',
-    title: 'AWS AI with Python',
+    title: 'AWS AI with Python Intro',
     client: 'ScholarHat',
     category: 'Educational',
     year: '2026',
     videoId: '1NwkoyflXsia9X59ihSq4Hr7gg3vb3tfr',
     platform: 'drive',
     duration: '0:49',
+    orientation: 'portrait',
   },
   {
     id: 'w4',
@@ -64,6 +68,7 @@ export const works: WorkItem[] = [
     videoId: '1xNiu0GoJjm5vCj61HQEn0fLsOGiqhzQc',
     platform: 'drive',
     duration: '0:34',
+    orientation: 'portrait',
   },
   {
     id: 'w5',

@@ -113,9 +113,9 @@ export function Work() {
           className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8"
           onClick={() => setActiveVideo(null)}
         >
-          <div className="absolute inset-0 bg-black/80 backdrop-blur-sm animate-fade-in" />
+          <div className="absolute inset-0 bg-black/90" />
           <div
-            className="relative w-full max-w-4xl animate-scale-in"
+            className="relative w-full max-w-4xl"
             onClick={(e) => e.stopPropagation()}
           >
             <button
@@ -124,7 +124,16 @@ export function Work() {
             >
               Close <X className="w-4 h-4" />
             </button>
-            <div className="relative aspect-video rounded-sm overflow-hidden bg-black border border-white/10">
+            <div
+              className={`relative mx-auto rounded-sm overflow-hidden bg-black border border-white/10 ${
+                activeVideo.orientation === 'portrait' ? '' : 'aspect-[4/3] sm:aspect-video'
+              }`}
+              style={
+                activeVideo.orientation === 'portrait'
+                  ? { aspectRatio: '9 / 16', width: 'min(100%, calc(70vh * 9 / 16))' }
+                  : undefined
+              }
+            >
               <iframe
                 src={getEmbedUrl(activeVideo)}
                 title={activeVideo.title}
