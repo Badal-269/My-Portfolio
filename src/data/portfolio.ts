@@ -35,7 +35,6 @@ export const works: WorkItem[] = [
     videoId: '1JpY1wRTu3WeUlwTnojgYkebViZqBTDv4',
     platform: 'drive',
     duration: '0:39',
-    orientation: 'portrait',
   },
   {
     id: 'w2',
@@ -57,7 +56,6 @@ export const works: WorkItem[] = [
     videoId: '1NwkoyflXsia9X59ihSq4Hr7gg3vb3tfr',
     platform: 'drive',
     duration: '0:49',
-    orientation: 'portrait',
   },
   {
     id: 'w4',
