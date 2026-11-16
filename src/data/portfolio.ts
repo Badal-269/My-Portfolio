@@ -70,7 +70,7 @@ export const works: WorkItem[] = [
   },
   {
     id: 'w5',
-    title: 'Coming soon',
+    title: 'AWS AI with Python Intro',
     client: 'ScholarHat',
     category: 'Educational',
     year: '2026',
